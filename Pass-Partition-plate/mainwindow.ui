@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>1292</width>
-    <height>676</height>
+    <height>825</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_26">
+   <layout class="QHBoxLayout" name="horizontalLayout_27">
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
@@ -98,6 +98,9 @@
                   <property name="text">
                    <string>Designed By :</string>
                   </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -119,6 +122,9 @@
                     <width>100</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                   <property name="readOnly">
                    <bool>false</bool>
@@ -152,6 +158,9 @@
                   <property name="text">
                    <string>CLIENT :</string>
                   </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -173,6 +182,9 @@
                     <width>100</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                   <property name="readOnly">
                    <bool>false</bool>
@@ -206,6 +218,9 @@
                   <property name="text">
                    <string>EQPT. :</string>
                   </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -227,6 +242,9 @@
                     <width>100</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                   <property name="readOnly">
                    <bool>false</bool>
@@ -260,6 +278,9 @@
                   <property name="text">
                    <string>JOB NO:</string>
                   </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -281,6 +302,9 @@
                     <width>100</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                   <property name="readOnly">
                    <bool>false</bool>
@@ -314,6 +338,9 @@
                   <property name="text">
                    <string>DOC No</string>
                   </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -335,6 +362,9 @@
                     <width>100</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                   <property name="readOnly">
                    <bool>false</bool>
@@ -368,6 +398,9 @@
                   <property name="text">
                    <string>DR. NO</string>
                   </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -389,6 +422,9 @@
                     <width>100</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                   <property name="readOnly">
                    <bool>false</bool>
@@ -422,6 +458,9 @@
                   <property name="text">
                    <string>REV :</string>
                   </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -443,6 +482,9 @@
                     <width>100</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                   <property name="readOnly">
                    <bool>false</bool>
@@ -537,18 +579,21 @@
                        </property>
                        <property name="minimumSize">
                         <size>
-                         <width>160</width>
+                         <width>200</width>
                          <height>20</height>
                         </size>
                        </property>
                        <property name="maximumSize">
                         <size>
-                         <width>160</width>
+                         <width>200</width>
                          <height>20</height>
                         </size>
                        </property>
                        <property name="text">
                         <string>Spec No.</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
                        </property>
                       </widget>
                      </item>
@@ -571,6 +616,28 @@
                        </property>
                       </widget>
                      </item>
+                     <item>
+                      <widget class="QLabel" name="label_19">
+                       <property name="minimumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
                     </layout>
                    </item>
                    <item>
@@ -585,18 +652,21 @@
                        </property>
                        <property name="minimumSize">
                         <size>
-                         <width>160</width>
+                         <width>200</width>
                          <height>20</height>
                         </size>
                        </property>
                        <property name="maximumSize">
                         <size>
-                         <width>160</width>
+                         <width>200</width>
                          <height>20</height>
                         </size>
                        </property>
                        <property name="text">
                         <string>Type/Grade</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
                        </property>
                       </widget>
                      </item>
@@ -616,6 +686,359 @@
                        </property>
                       </widget>
                      </item>
+                     <item>
+                      <widget class="QLabel" name="label_20">
+                       <property name="minimumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_26">
+                     <item>
+                      <widget class="QLabel" name="label_40">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>200</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>200</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>Size/Thickness</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QComboBox" name="cb_thickness">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                         <horstretch>160</horstretch>
+                         <verstretch>20</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>160</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>160</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_21">
+                       <property name="minimumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_46">
+                     <item>
+                      <widget class="QLabel" name="label_64">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>200</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>200</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>Composition</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLineEdit" name="le_composition">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>160</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>160</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: rgb(221, 221, 221);</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                       <property name="readOnly">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_22">
+                       <property name="minimumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_35">
+                     <item>
+                      <widget class="QLabel" name="label_47">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>200</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>200</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>UNS No</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLineEdit" name="le_uns_no">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>160</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>160</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: rgb(221, 221, 221);</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                       <property name="readOnly">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_23">
+                       <property name="minimumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_37">
+                     <item>
+                      <widget class="QLabel" name="label_51">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>200</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>200</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>Product Type</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLineEdit" name="le_product_type">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>160</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>160</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: rgb(221, 221, 221);</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                       <property name="readOnly">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_24">
+                       <property name="minimumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
                     </layout>
                    </item>
                    <item>
@@ -630,18 +1053,21 @@
                        </property>
                        <property name="minimumSize">
                         <size>
-                         <width>160</width>
+                         <width>200</width>
                          <height>20</height>
                         </size>
                        </property>
                        <property name="maximumSize">
                         <size>
-                         <width>160</width>
+                         <width>200</width>
                          <height>20</height>
                         </size>
                        </property>
                        <property name="text">
                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Design Temprature&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
                        </property>
                        <property name="wordWrap">
                         <bool>true</bool>
@@ -649,7 +1075,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QLineEdit" name="le_design_temp">
+                      <widget class="QLineEdit" name="le_temprature">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -668,8 +1094,33 @@
                          <height>20</height>
                         </size>
                        </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
                        <property name="readOnly">
                         <bool>false</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_25">
+                       <property name="minimumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>80</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>kgf/cm2</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
                        </property>
                       </widget>
                      </item>
@@ -705,18 +1156,21 @@
                    <widget class="QLabel" name="label">
                     <property name="minimumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Allowable Stress(s)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -734,6 +1188,37 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(221, 221, 221);</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                    <property name="readOnly">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_29">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>kgf/cm2</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                    </widget>
                   </item>
                  </layout>
@@ -744,18 +1229,21 @@
                    <widget class="QLabel" name="label_2">
                     <property name="minimumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Pressure Drop(q)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -773,6 +1261,31 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_28">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>kgf/cm2</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                    </widget>
                   </item>
                  </layout>
@@ -783,18 +1296,21 @@
                    <widget class="QLabel" name="label_3">
                     <property name="minimumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Inside Diameter(D)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -812,6 +1328,31 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_38">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>mm</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                    </widget>
                   </item>
                  </layout>
@@ -822,18 +1363,21 @@
                    <widget class="QLabel" name="label_5">
                     <property name="minimumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Material</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -863,6 +1407,28 @@
                     </item>
                    </widget>
                   </item>
+                  <item>
+                   <widget class="QLabel" name="label_37">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
                  </layout>
                 </item>
                 <item>
@@ -871,18 +1437,21 @@
                    <widget class="QLabel" name="label_4">
                     <property name="minimumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Minimum Thickness(t1)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -900,8 +1469,36 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(221, 221, 221);</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                     <property name="readOnly">
                      <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_36">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>mm</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -913,18 +1510,21 @@
                    <widget class="QLabel" name="label_6">
                     <property name="minimumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
-                     <string>Plate Thickness(b)</string>
+                     <string>Plate Dimension(b)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -942,8 +1542,33 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                     <property name="readOnly">
                      <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_35">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>mm</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -955,18 +1580,21 @@
                    <widget class="QLabel" name="label_7">
                     <property name="minimumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
-                     <string>Plate Thickness(a)</string>
+                     <string>Plate Dimension(a)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -984,8 +1612,33 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                     <property name="readOnly">
                      <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_34">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>mm</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -997,18 +1650,21 @@
                    <widget class="QLabel" name="label_8">
                     <property name="minimumSize">
                      <size>
-                      <width>60</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>60</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Condition</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1054,18 +1710,21 @@
                    <widget class="QLabel" name="label_9">
                     <property name="minimumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Ratio(a/b)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1083,8 +1742,36 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(221, 221, 221);</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                     <property name="readOnly">
                      <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_32">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1096,18 +1783,21 @@
                    <widget class="QLabel" name="label_10">
                     <property name="minimumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Factor(B)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1125,8 +1815,36 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(221, 221, 221);</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                     <property name="readOnly">
                      <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_31">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1142,18 +1860,21 @@
                    <widget class="QLabel" name="label_13">
                     <property name="minimumSize">
                      <size>
-                      <width>150</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>150</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Minimum Reqd. Thickness(t)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1171,8 +1892,36 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(221, 221, 221);</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                     <property name="readOnly">
                      <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_43">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>mm</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1184,18 +1933,21 @@
                    <widget class="QLabel" name="label_11">
                     <property name="minimumSize">
                      <size>
-                      <width>150</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>150</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Minimum Reqd. Thickness(t2)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1213,8 +1965,36 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(221, 221, 221);</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                     <property name="readOnly">
                      <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_41">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>mm</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1226,18 +2006,21 @@
                    <widget class="QLabel" name="label_12">
                     <property name="minimumSize">
                      <size>
-                      <width>150</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>150</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Collision Allowance (CA)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1255,8 +2038,33 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                     <property name="readOnly">
                      <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_42">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>mm</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1281,6 +2089,9 @@
                     <property name="text">
                      <string>Minimum Reqd. Thickness + CA (tr)</string>
                     </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                    </widget>
                   </item>
                   <item>
@@ -1297,8 +2108,36 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(221, 221, 221);</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                     <property name="readOnly">
                      <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_39">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>mm</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1310,18 +2149,21 @@
                    <widget class="QLabel" name="label_15">
                     <property name="minimumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Provided Thickness (t)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1339,8 +2181,33 @@
                       <height>20</height>
                      </size>
                     </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
                     <property name="readOnly">
                      <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_30">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>mm</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1352,18 +2219,21 @@
                    <widget class="QLabel" name="label_16">
                     <property name="minimumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>120</width>
+                      <width>200</width>
                       <height>20</height>
                      </size>
                     </property>
                     <property name="text">
                      <string>Fillet Size(F)</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -1382,10 +2252,35 @@
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true"/>
+                     <string notr="true">background-color: rgb(221, 221, 221);</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                     <property name="readOnly">
                      <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_27">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>mm</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
                   </item>

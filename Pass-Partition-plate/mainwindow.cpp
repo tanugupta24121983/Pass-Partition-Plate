@@ -14,6 +14,8 @@
 #include <QSettings>
 #include <QMessageBox>
 
+
+QMap<QString, QMap<QString, QMap<QString, QList<QString>>>> m_map;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -36,7 +38,14 @@ MainWindow::MainWindow(QWidget *parent)
     h = ui->lb_dimanesion_table_2->height();
     ui->lb_dimanesion_table_2->setPixmap(pixmap2);
 
+    ui->fh_cb_lifting_ug_materia_2->setInsertPolicy(QComboBox::NoInsert);
+    ui->fh_cb_lifting_ug_materia_2->completer()->setCompletionMode(QCompleter::PopupCompletion);
+    ui->fh_cb_lifting_ug_materia_2->completer()->setFilterMode(Qt::MatchContains);
     ui->le_inside_diameter->setText(QString::number(0));
+    connect(ui->fh_cb_lifting_ug_materia_2,SIGNAL(textActivated(QString)), this, SLOT (on_fh_cb_lifting_ug_materia_2_activated(QString)));
+    connect(ui->fh_cb_grade_2,SIGNAL(textActivated(QString)), this, SLOT (on_fh_cb_grade_2_activated(QString)));
+    connect(ui->cb_thickness,SIGNAL(textActivated(QString)), this, SLOT (on_cb_thickness_activated(QString)));
+    load_temprature_data();
 }
 
 MainWindow::~MainWindow()
@@ -44,6 +53,100 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::load_temprature_data()
+{
+    QString fileName = "C:/ISGEC-TOOLS/ALLOWABLE STRESS TABLE.xlsx";
+    QFile file(fileName);
+    try {
+        if(file.open(QIODevice::ReadOnly)) {
+            qDebug() << "File opened succesfully";
+            auto excel     = new QAxObject("Excel.Application");
+            auto workbooks = excel->querySubObject("Workbooks");
+            auto workbook  = workbooks->querySubObject("Open(const QString&)",fileName);
+            auto sheets    = workbook->querySubObject("Worksheets");
+            auto sheet     = sheets->querySubObject("Item(int)", 1);
+
+            QVariant var;
+            if (sheet != NULL && ! sheet->isNull())
+            {
+                QAxObject *usedRange = sheet->querySubObject("UsedRange");
+
+                var = usedRange->dynamicCall("Value");
+                delete usedRange;
+            }
+
+            workbook->dynamicCall("Close()");
+            excel->dynamicCall("Quit()");
+            delete excel;
+
+            QVariantList varRows = var.toList();
+            const int rowCount = varRows.size();
+            QVariantList rowData;
+
+            for(int i=1;i<rowCount;++i)
+            {
+                rowData = varRows[i].toList();
+                auto specno =rowData[2].toString();
+                specno = specno.trimmed();
+                if(specno == "") continue;
+                if(!m_map.contains(specno)) {
+                    auto grade= rowData[3].toString();
+                    m_map.insert(specno,{});
+                    QMap<QString, QMap<QString, QList<QString>>> &it = m_map.find(specno).value();
+                    it.insert(grade,{});
+                    QMap<QString, QList<QString>> &it_grade = it.find(grade).value();
+                    auto thickness = rowData[4].toString();
+                    QList<QString> temp_list;
+                    auto composition = rowData[1].toString();
+                    temp_list.append(composition);
+                    for(int i = 0; i < 37; i++)
+                    {
+                        auto temprature = rowData[5 + i].toString();
+                        temp_list.append(temprature);
+                    }
+
+                    it_grade.insert(thickness,temp_list);
+                }
+
+                else {
+                    QMap<QString, QMap<QString, QList<QString>>> &it = m_map.find(specno).value();
+                    auto grade = rowData[3].toString();
+                    grade = grade.trimmed();
+                    QList<QString> temp_list;
+                    auto composition = rowData[1].toString();
+                    temp_list.append(composition);
+                    for(int i = 0; i < 37; i++)
+                    {
+                        auto temprature = rowData[5 + i].toString();
+                        temp_list.append(temprature);
+                    }
+                    if(!it.contains(grade)) {
+                        it.insert(grade,{});
+                        QMap<QString, QList<QString>> &it_grade = it.find(grade).value();
+                        auto thickness = rowData[4].toString();
+                        it_grade.insert(thickness,temp_list);
+                    }
+                    else {
+                        QMap<QString, QList<QString>> &it_grade = it.find(grade).value();
+                        auto thickness = rowData[4].toString();
+                        it_grade.insert(thickness,temp_list);
+                    }
+                }
+            }
+
+        }
+    }
+    catch(...) {
+        file.close();
+    }
+    file.close();
+    QMapIterator<QString,QMap<QString, QMap<QString, QList<QString>>>> i(m_map);
+    while (i.hasNext()) {
+        i.next();
+        ui->fh_cb_lifting_ug_materia_2->addItem(i.key());
+    }
+    ui->fh_cb_lifting_ug_materia_2->setCurrentIndex(0);
+}
 
 void MainWindow::on_le_inside_diameter_editingFinished()
 {
@@ -577,47 +680,6 @@ void MainWindow::on_le_plate_thickness_a_editingFinished()
 }
 
 
-void MainWindow::on_pb_submit_clicked()
-{
-    QString password = QString("%1").arg(QString(QCryptographicHash::hash(ui->le_password->text().toUtf8(),QCryptographicHash::Md5).toHex()));
-    QString username = ui->le_username->text();
-    QString filename="\\\\MANISH\\Users\\MANISH\\Downloads\\Test-Deploy\\Data.txt";
-    QFile file( filename );
-    std::map<QString, QString> usermap;
-    if ( !file.open(QIODevice::ReadOnly) ){
-        QMessageBox::warning(this, tr("My Application"),
-                             tr("Unable to locate the Database File"));
-    }
-    QString Complete_Data = file.readAll();
-    QStringList userdetails;
-    if(!Complete_Data.isEmpty())
-        userdetails = Complete_Data.split("\n");
-
-    foreach(QString user, userdetails) {
-        if(user.isEmpty())
-            continue;
-        QString username = user.split(" ").at(0);
-        QString password = user.split("\n").at(0).split(" ").at(1).split("\r").at(0);
-        usermap.insert({username, password});
-    }
-    if(auto it = usermap.find(username); it != usermap.end())
-    {
-        if(password == it->second) {
-            ui->stackedWidget->setCurrentIndex(0);
-        }
-        else {
-            QMessageBox::warning(this, tr("My Application"),
-                                 tr("Password incorrect"));
-        }
-    }
-    else {
-        QMessageBox::warning(this, tr("My Application"),
-                             tr("User Does Not Exists"));
-    }
-
-}
-
-
 void MainWindow::on_le_press_drop_editingFinished()
 {
 
@@ -674,7 +736,15 @@ void MainWindow::on_le_minimun_thickness_t1_editingFinished()
 void MainWindow::on_le_provided_thickness_t_editingFinished()
 {
     double filletsize = ui->le_provided_thickness_t->text().toDouble()* 0.75;
-    ui->le_FilletSize->setText(QString::number(filletsize,'f', 4));
+    int filletsize_int = filletsize;
+    if(double(filletsize_int) == filletsize)
+    {
+        ui->le_FilletSize->setText(QString::number(filletsize_int));
+    }
+    else
+    {
+        ui->le_FilletSize->setText(QString::number(filletsize_int + 1));
+    }
 }
 
 
@@ -731,6 +801,7 @@ void MainWindow::on_pb_calculate_clicked()
 void MainWindow::on_pb_generate_report_clicked()
 {
     QString fileName = "C:/ISGEC-TOOLS/Pass partition plate.xlsx";
+    QString fileName_pdf = "C:/ISGEC-TOOLS/Pass_partition_plate";
     QFile file_write(fileName);
     if(file_write.open(QIODevice::ReadWrite)) {
        excel     = new QAxObject("Excel.Application");
@@ -828,6 +899,7 @@ void MainWindow::on_pb_generate_report_clicked()
     cell->setProperty("Value", ui->cb_result->text());
 
     workbook->dynamicCall("Save()");
+    workbook->dynamicCall("ExportAsFixedFormat(int, const QString&, int, BOOL, BOOL)", 0, fileName_pdf, 0, false, false);
     workbook->dynamicCall("Close()");
     workbook->dynamicCall("Quit()");
     excel->dynamicCall("Quit()");
@@ -836,5 +908,164 @@ void MainWindow::on_pb_generate_report_clicked()
     QMessageBox msgBox;
     msgBox.setText("Report has been generated... ");
     msgBox.exec();
+}
+
+
+void MainWindow::on_fh_cb_lifting_ug_materia_2_activated(const QString &arg1)
+{
+    QMap<QString, QMap<QString, QList<QString>>> &it_grade = m_map.find(arg1).value();
+    ui->fh_cb_grade_2->clear();
+    if(!it_grade.empty()) {
+        QMapIterator<QString, QMap<QString, QList<QString>>> i(it_grade);
+        while (i.hasNext()) {
+            i.next();
+            QString key = i.key();
+            ui->fh_cb_grade_2->addItem(key);
+            ui->fh_cb_grade_2->setCurrentIndex(-1);
+        }
+    }
+    ui->fh_cb_grade_2->setCurrentIndex(0);
+    if(ui->fh_cb_grade_2->count())
+        on_cb_grade_activated_custom(ui->fh_cb_grade_2->currentText());
+}
+
+void MainWindow::on_cb_grade_activated_custom(const QString &arg1)
+{
+    QMap<QString, QList<QString>> &ref = m_map.find(ui->fh_cb_lifting_ug_materia_2->currentText()).value().find(arg1).value();
+    QMapIterator<QString, QList<QString>> i_thickness(ref);
+    ui->cb_thickness->clear();
+    ui->cb_thickness->setCurrentIndex(-1);
+    while (i_thickness.hasNext()) {
+        i_thickness.next();
+        ui->cb_thickness->addItem(i_thickness.key());
+    }
+    ui->cb_thickness->setCurrentIndex(0);
+    if(ui->cb_thickness->count())
+        on_cb_thickness_activated_custom(ui->cb_thickness->currentText());
+}
+
+void MainWindow::on_fh_cb_grade_2_activated(const QString &arg1)
+{
+    QMap<QString, QList<QString>> &ref = m_map.find(ui->fh_cb_lifting_ug_materia_2->currentText()).value().find(arg1).value();
+    QMapIterator<QString, QList<QString>> i_thickness(ref);
+    ui->cb_thickness->clear();
+    ui->cb_thickness->setCurrentIndex(-1);
+    while (i_thickness.hasNext()) {
+        i_thickness.next();
+        ui->cb_thickness->addItem(i_thickness.key());
+    }
+    ui->cb_thickness->setCurrentIndex(0);
+    if(ui->cb_thickness->count())
+        on_cb_thickness_activated_custom(ui->cb_thickness->currentText());
+}
+
+void MainWindow::on_cb_thickness_activated_custom(const QString &arg1)
+{
+    QList<QString> &ref = m_map.find(ui->fh_cb_lifting_ug_materia_2->currentText()).value().find(ui->fh_cb_grade_2->currentText()).value().find(arg1).value();
+    if(!ref.isEmpty()) {
+        ui->le_temprature->setText("40");
+        ui->le_composition->setText(ref.at(0));
+        ui->le_uns_no->setText(ref.at(1));
+        ui->le_product_type->setText(ref.at(2));
+        ui->le_allowable_stress->setText(QString::number( ref.at(3).toDouble()));
+    }
+}
+
+void MainWindow::on_cb_thickness_activated(const QString &arg1)
+{
+    QList<QString> &ref = m_map.find(ui->fh_cb_lifting_ug_materia_2->currentText()).value().find(ui->fh_cb_grade_2->currentText()).value().find(arg1).value();
+    if(!ref.isEmpty()) {
+        ui->le_temprature->setText("40");
+        ui->le_composition->setText(ref.at(0));
+        ui->le_uns_no->setText(ref.at(1));
+        ui->le_product_type->setText(ref.at(2));
+        ui->le_allowable_stress->setText(QString::number( ref.at(3).toDouble()));
+    }
+
+}
+
+
+void MainWindow::on_le_temprature_editingFinished()
+{
+    int temp = ui->le_temprature->text().toInt();
+    QList<QString> &ref = m_map.find(ui->fh_cb_lifting_ug_materia_2->currentText()).value().find(ui->fh_cb_grade_2->currentText()).value().find(ui->cb_thickness->currentText()).value();
+    QString allowableStress ;
+    if(40 >= temp)
+    {
+        allowableStress = QString::number( ref.at(3).toDouble());
+    }
+    else if(temp > 40 && temp < 65)
+    {
+        int lowerindex = 3;
+        int higherindex = 4;
+        float x = 40;
+        float z = 65;
+        float y = temp;
+        float m = ref.at(lowerindex).toDouble();
+        float o = ref.at(higherindex).toDouble();
+        allowableStress = QString::number(((o-m)/(z-x) * (y - x)) + m);
+    }
+    else if(temp == 65)
+    {
+        allowableStress = QString::number( ref.at(4).toDouble());
+    }
+    else if(temp > 65 && temp < 100)
+    {
+        int lowerindex = 4;
+        int higherindex = 5;
+        float x = 65;
+        float z = 100;
+        float y = temp;
+        float m = ref.at(lowerindex).toDouble();
+        float o = ref.at(higherindex).toDouble();
+        allowableStress = QString::number(((o-m)/(z-x) * (y - x)) + m);
+    }
+    else if(temp - 100 >= 0 && temp %25 == 0)
+    {
+        int newtemp = temp -100;
+        int index = newtemp / 25;
+        QString temp = ref.at(index + 5);
+        if(temp.contains("NA",Qt::CaseInsensitive) )
+        {
+            QMessageBox::warning(this, tr("My Application"),
+                                 tr("Invalid Temprature"));
+            ui->le_allowable_stress->setText("0");
+            return;
+
+        }
+        allowableStress = QString::number( ref.at(5 + index).toDouble());
+    }
+
+    else if(temp > 900)
+    {
+        QMessageBox::warning(this, tr("My Application"),
+                             tr("Invalid Temprature"));
+        ui->le_allowable_stress->setText("0");
+        return;
+
+    }
+    else
+    {
+        int newtemp = temp -100;
+        int index = newtemp / 25;
+        int lowerindex = 5 + index;
+        int higherindex = lowerindex + 1;
+        float x = 100 + index * 25;
+        float z = x + 25;
+        float y = temp;
+        if(ref.at(lowerindex).contains("NA",Qt::CaseInsensitive) || ref.at(higherindex).contains("NA",Qt::CaseInsensitive))
+        {
+            QMessageBox::warning(this, tr("My Application"),
+                                 tr("Invalid Temprature"));
+            ui->le_allowable_stress->setText("0");
+            return;
+
+        }
+        float m = ref.at(lowerindex).toDouble();
+        float o = ref.at(higherindex).toDouble();
+        allowableStress = QString::number(m -((m-o)/(z-x) * (y - x)));
+    }
+    QString Final_value = QString::number(10.197162 * allowableStress.toFloat());
+    ui->le_allowable_stress->setText(Final_value);
 }
 

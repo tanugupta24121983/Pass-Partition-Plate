@@ -34,8 +34,6 @@ private slots:
 
     void on_le_plate_thickness_a_editingFinished();
 
-    void on_pb_submit_clicked();
-
     void on_le_press_drop_editingFinished();
 
     void on_le_factor_editingFinished();
@@ -57,6 +55,18 @@ private slots:
     void on_pb_calculate_clicked();
 
     void on_pb_generate_report_clicked();
+
+    void load_temprature_data();
+
+    void on_fh_cb_lifting_ug_materia_2_activated(const QString &arg1);
+    void on_cb_grade_activated_custom(const QString &arg1);
+    void on_cb_thickness_activated_custom(const QString &arg1);
+
+    void on_cb_thickness_activated(const QString &arg1);
+
+    void on_fh_cb_grade_2_activated(const QString &arg1);
+
+    void on_le_temprature_editingFinished();
 
 private:
     Ui::MainWindow *ui;
