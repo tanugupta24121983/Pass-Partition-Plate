@@ -146,6 +146,7 @@ void MainWindow::load_temprature_data()
         ui->fh_cb_lifting_ug_materia_2->addItem(i.key());
     }
     ui->fh_cb_lifting_ug_materia_2->setCurrentIndex(0);
+    on_fh_cb_lifting_ug_materia_2_activated(ui->fh_cb_lifting_ug_materia_2->currentText());
 }
 
 void MainWindow::on_le_inside_diameter_editingFinished()
@@ -180,7 +181,9 @@ void MainWindow::calculate_thickness(QString arg1) {
             ui->le_minimun_thickness_t1->setText(QString::number(15.9));
         }
         else {
-            ui->le_minimun_thickness_t1->setText(QString::number(-1));
+            QMessageBox::warning(this, tr("My Application"),
+                                 tr("Diameter Out Of Range"));
+            ui->le_minimun_thickness_t1->setText(QString::number(0));
         }
     }
     else if(arg1 == "Alloy Material")
@@ -198,7 +201,9 @@ void MainWindow::calculate_thickness(QString arg1) {
             ui->le_minimun_thickness_t1->setText(QString::number(12.7));
         }
         else {
-            ui->le_minimun_thickness_t1->setText(QString::number(-1));
+            QMessageBox::warning(this, tr("My Application"),
+                                 tr("Diameter Out Of Range"));
+            ui->le_minimun_thickness_t1->setText(QString::number(0));
         }
     }
     else
@@ -229,454 +234,19 @@ void MainWindow::on_cb_material_currentTextChanged(const QString &arg1)
 
 void MainWindow::on_le_plate_thickness_b_editingFinished()
 {
-    float ration = ui->le_plate_thickness_a->text().toFloat()/ui->le_plate_thickness_b->text().toFloat();
-    ui->le_ratio->setText(QString::number(ration,'f', 4));
-    if(ui->cb_condition->currentText() == "Three sides fixed - One side simply supported")
+    if(!(ui->le_plate_thickness_b->text().isEmpty() || ui->le_plate_thickness_a->text().isEmpty()))
     {
-       if(ration == 0.25) {
-           ui->le_factor->setText(QString::number(0.020,'f', 4));
-       }
-       else if((ration > 0.25)&&(ration < 0.50)){
-           float N37 = 0.25;
-           float P37 = 0.5;
-           float N38 = 0.020;
-           float P38 = 0.081;
-           float O37 = ration;
-           float mul1 = (N37 - O37)/(N37 - P37);
-           float mul2 = N38 - P38;
-           float value = N38 - (mul1 * mul2);
-           ui->le_factor->setText(QString::number(value,'f', 4));
-       }
-       else if(ration == 0.50) {
-            ui->le_factor->setText(QString::number(0.081,'f', 4));
-       }
-       else if((ration >  0.50)&&(ration < 0.75)){
-           float N37 = 0.50;
-           float P37 = 0.75;
-           float N38 = 0.081;
-           float P38 = 0.173;
-           float O37 = ration;
-           float mul1 = (N37 - O37)/(N37 - P37);
-           float mul2 = N38 - P38;
-           float value = N38 - (mul1 * mul2);
-           ui->le_factor->setText(QString::number(value,'f', 4));
-       }
-       else if(ration == 0.75) {
-            ui->le_factor->setText(QString::number(0.173,'f', 4));
-       }
-       else if((ration >  0.75)&&(ration < 1.0)){
-            float N37 = 0.75;
-            float P37 = 1.0;
-            float N38 = 0.173;
-            float P38 = .307;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-       }
-       else {
-           ui->le_factor->setText(QString::number(0,'f', 4));
-       }
+        calculate_B_Factor();
     }
-    else if(ui->cb_condition->currentText() == "Long sides fixed Short sides simply supported")
-    {
-        if(ration == 1.0) {
-            ui->le_factor->setText(QString::number(.4182,'f', 4));
-        }
-        else if((ration > 1.0)&&(ration < 1.2)){
-            float N37 = 1.0;
-            float P37 = 1.2;
-            float N38 = .4182;
-            float P38 = .4626;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.2) {
-             ui->le_factor->setText(QString::number(.4182,'f', 4));
-        }
-        else if((ration > 1.2)&&(ration < 1.4)){
-            float N37 = 1.2;
-            float P37 = 1.4;
-            float N38 = .4626;
-            float P38 = .4860;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.4) {
-             ui->le_factor->setText(QString::number(.4860,'f', 4));
-        }
-        else if((ration > 1.4)&&(ration < 1.6)){
-            float N37 = 1.4;
-            float P37 = 1.6;
-            float N38 = .4860;
-            float P38 = .4968;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.6) {
-             ui->le_factor->setText(QString::number(.4968,'f', 4));
-        }
-        else if((ration > 1.6)&&(ration < 1.8)){
-            float N37 = 1.6;
-            float P37 = 1.8;
-            float N38 = .4968;
-            float P38 = .4971;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.8) {
-             ui->le_factor->setText(QString::number(.4971,'f', 4));
-        }
-        else if((ration > 1.8)&&(ration < 2.0)){
-            float N37 = 1.8;
-            float P37 = 2.0;
-            float N38 = .4971;
-            float P38 = .4973;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 2.0) {
-             ui->le_factor->setText(QString::number(.4973,'f', 4));
-        }
-        else {
-            ui->le_factor->setText(QString::number(0.5000,'f', 4));
-        }
-    }
-    else if(ui->cb_condition->currentText() == "Short sides fixed Long sides simply supported")
-    {
-        if(ration == 1.0) {
-            ui->le_factor->setText(QString::number(.4182,'f', 4));
-        }
-        else if((ration > 1.0)&&(ration < 1.2)){
-            float N37 = 1.0;
-            float P37 = 1.2;
-            float N38 = .4182;
-            float P38 = .5208;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.2) {
-             ui->le_factor->setText(QString::number(.5208,'f', 4));
-        }
-        else if((ration > 1.2)&&(ration < 1.4)){
-            float N37 = 1.2;
-            float P37 = 1.4;
-            float N38 = .5208;
-            float P38 = .5988;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.4) {
-             ui->le_factor->setText(QString::number(.5988,'f', 4));
-        }
-        else if((ration > 1.4)&&(ration < 1.6)){
-            float N37 = 1.4;
-            float P37 = 1.6;
-            float N38 = .5988;
-            float P38 = .6540;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.6) {
-             ui->le_factor->setText(QString::number(.6540,'f', 4));
-        }
-        else if((ration > 1.6)&&(ration < 1.8)){
-            float N37 = 1.6;
-            float P37 = 1.8;
-            float N38 = .6540;
-            float P38 = .6912;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.8) {
-             ui->le_factor->setText(QString::number(.6912,'f', 4));
-        }
-        else if((ration > 1.8)&&(ration < 2.0)){
-            float N37 = 1.8;
-            float P37 = 2.0;
-            float N38 = .6912;
-            float P38 = .7146;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 2.0) {
-             ui->le_factor->setText(QString::number(.7146,'f', 4));
-        }
-        else {
-            ui->le_factor->setText(QString::number(0.7500,'f', 4));
-        }
-    }
-    else {
-        QMessageBox::warning(this, tr("My Application"),
-                             tr("Invalid Selection"));
-    }
-
-    // Calculate plate thickness
-    double H36 = ui->le_plate_thickness_b->text().toDouble();
-    double H16 = ui->le_press_drop->text().toDouble();
-    double H44 = ui->le_factor->text().toDouble();
-    double H14 = ui->le_allowable_stress->text().toDouble();
-    double P8 = ui->le_minimun_thickness_t1->text().toDouble();
-    double minReqdThickness = (H36*sqrt(H16*H44/(1.5*H14)));
-    ui->le_min_reqd_thickness->setText(QString::number(minReqdThickness,'f', 4));
-
 }
 
 
 void MainWindow::on_le_plate_thickness_a_editingFinished()
 {
-    float ration = ui->le_plate_thickness_a->text().toFloat()/ui->le_plate_thickness_b->text().toFloat();
-    ui->le_ratio->setText(QString::number(ration,'f', 4));
-    if(ui->cb_condition->currentText() == "Three sides fixed - One side simply supported")
+    if(!(ui->le_plate_thickness_b->text().isEmpty() || ui->le_plate_thickness_a->text().isEmpty()))
     {
-       if(ration == 0.25) {
-           ui->le_factor->setText(QString::number(0.020,'f', 4));
-       }
-       else if((ration > 0.25)&&(ration < 0.50)){
-           float N37 = 0.25;
-           float P37 = 0.5;
-           float N38 = 0.020;
-           float P38 = 0.081;
-           float O37 = ration;
-           float mul1 = (N37 - O37)/(N37 - P37);
-           float mul2 = N38 - P38;
-           float value = N38 - (mul1 * mul2);
-           ui->le_factor->setText(QString::number(value,'f', 4));
-       }
-       else if(ration == 0.50) {
-            ui->le_factor->setText(QString::number(0.081,'f', 4));
-       }
-       else if((ration >  0.50)&&(ration < 0.75)){
-           float N37 = 0.50;
-           float P37 = 0.75;
-           float N38 = 0.081;
-           float P38 = 0.173;
-           float O37 = ration;
-           float mul1 = (N37 - O37)/(N37 - P37);
-           float mul2 = N38 - P38;
-           float value = N38 - (mul1 * mul2);
-           ui->le_factor->setText(QString::number(value,'f', 4));
-       }
-       else if(ration == 0.75) {
-            ui->le_factor->setText(QString::number(0.173,'f', 4));
-       }
-       else if((ration >  0.75)&&(ration < 1.0)){
-            float N37 = 0.75;
-            float P37 = 1.0;
-            float N38 = 0.173;
-            float P38 = .307;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-       }
-       else {
-           ui->le_factor->setText(QString::number(0,'f', 4));
-       }
+        calculate_B_Factor();
     }
-    else if(ui->cb_condition->currentText() == "Long sides fixed Short sides simply supported")
-    {
-        if(ration == 1.0) {
-            ui->le_factor->setText(QString::number(.4182,'f', 4));
-        }
-        else if((ration > 1.0)&&(ration < 1.2)){
-            float N37 = 1.0;
-            float P37 = 1.2;
-            float N38 = .4182;
-            float P38 = .4626;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.2) {
-             ui->le_factor->setText(QString::number(.4182,'f', 4));
-        }
-        else if((ration > 1.2)&&(ration < 1.4)){
-            float N37 = 1.2;
-            float P37 = 1.4;
-            float N38 = .4626;
-            float P38 = .4860;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.4) {
-             ui->le_factor->setText(QString::number(.4860,'f', 4));
-        }
-        else if((ration > 1.4)&&(ration < 1.6)){
-            float N37 = 1.4;
-            float P37 = 1.6;
-            float N38 = .4860;
-            float P38 = .4968;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.6) {
-             ui->le_factor->setText(QString::number(.4968,'f', 4));
-        }
-        else if((ration > 1.6)&&(ration < 1.8)){
-            float N37 = 1.6;
-            float P37 = 1.8;
-            float N38 = .4968;
-            float P38 = .4971;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.8) {
-             ui->le_factor->setText(QString::number(.4971,'f', 4));
-        }
-        else if((ration > 1.8)&&(ration < 2.0)){
-            float N37 = 1.8;
-            float P37 = 2.0;
-            float N38 = .4971;
-            float P38 = .4973;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 2.0) {
-             ui->le_factor->setText(QString::number(.4973,'f', 4));
-        }
-        else {
-            ui->le_factor->setText(QString::number(0.5000,'f', 4));
-        }
-    }
-    else if(ui->cb_condition->currentText() == "Short sides fixed Long sides simply supported")
-    {
-        if(ration == 1.0) {
-            ui->le_factor->setText(QString::number(.4182,'f', 4));
-        }
-        else if((ration > 1.0)&&(ration < 1.2)){
-            float N37 = 1.0;
-            float P37 = 1.2;
-            float N38 = .4182;
-            float P38 = .5208;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.2) {
-             ui->le_factor->setText(QString::number(.5208,'f', 4));
-        }
-        else if((ration > 1.2)&&(ration < 1.4)){
-            float N37 = 1.2;
-            float P37 = 1.4;
-            float N38 = .5208;
-            float P38 = .5988;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.4) {
-             ui->le_factor->setText(QString::number(.5988,'f', 4));
-        }
-        else if((ration > 1.4)&&(ration < 1.6)){
-            float N37 = 1.4;
-            float P37 = 1.6;
-            float N38 = .5988;
-            float P38 = .6540;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.6) {
-             ui->le_factor->setText(QString::number(.6540,'f', 4));
-        }
-        else if((ration > 1.6)&&(ration < 1.8)){
-            float N37 = 1.6;
-            float P37 = 1.8;
-            float N38 = .6540;
-            float P38 = .6912;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 1.8) {
-             ui->le_factor->setText(QString::number(.6912,'f', 4));
-        }
-        else if((ration > 1.8)&&(ration < 2.0)){
-            float N37 = 1.8;
-            float P37 = 2.0;
-            float N38 = .6912;
-            float P38 = .7146;
-            float O37 = ration;
-            float mul1 = (N37 - O37)/(N37 - P37);
-            float mul2 = N38 - P38;
-            float value = N38 - (mul1 * mul2);
-            ui->le_factor->setText(QString::number(value,'f', 4));
-        }
-        else if(ration == 2.0) {
-             ui->le_factor->setText(QString::number(.7146,'f', 4));
-        }
-        else {
-            ui->le_factor->setText(QString::number(0.7500,'f', 4));
-        }
-    }
-    else {
-        QMessageBox::warning(this, tr("My Application"),
-                             tr("Invalid Selection"));
-    }
-
-    // Calculate plate thickness
-    double H36 = ui->le_plate_thickness_b->text().toDouble();
-    double H16 = ui->le_press_drop->text().toDouble();
-    double H44 = ui->le_factor->text().toDouble();
-    double H14 = ui->le_allowable_stress->text().toDouble();
-    double P8 = ui->le_minimun_thickness_t1->text().toDouble();
-    double minReqdThickness = (H36*sqrt(H16*H44/(1.5*H14)));
-    ui->le_min_reqd_thickness->setText(QString::number(minReqdThickness,'f', 4));
 }
 
 
@@ -802,7 +372,9 @@ void MainWindow::on_pb_generate_report_clicked()
 {
     QString fileName = "C:/ISGEC-TOOLS/Pass partition plate.xlsx";
     QString fileName_pdf = "C:/ISGEC-TOOLS/Pass_partition_plate";
+    QFile::remove(fileName_pdf + ".pdf");
     QFile file_write(fileName);
+
     if(file_write.open(QIODevice::ReadWrite)) {
        excel     = new QAxObject("Excel.Application");
        workbooks = excel->querySubObject("Workbooks");
@@ -899,7 +471,7 @@ void MainWindow::on_pb_generate_report_clicked()
     cell->setProperty("Value", ui->cb_result->text());
 
     workbook->dynamicCall("Save()");
-    workbook->dynamicCall("ExportAsFixedFormat(int, const QString&, int, BOOL, BOOL)", 0, fileName_pdf, 0, false, false);
+    workbook->dynamicCall("ExportAsFixedFormat(int, const QString&, int, BOOL, BOOL)", 0, fileName_pdf, 0, false, true);
     workbook->dynamicCall("Close()");
     workbook->dynamicCall("Quit()");
     excel->dynamicCall("Quit()");
@@ -967,7 +539,7 @@ void MainWindow::on_cb_thickness_activated_custom(const QString &arg1)
         ui->le_composition->setText(ref.at(0));
         ui->le_uns_no->setText(ref.at(1));
         ui->le_product_type->setText(ref.at(2));
-        ui->le_allowable_stress->setText(QString::number( ref.at(3).toDouble()));
+        ui->le_allowable_stress->setText(QString::number( 10.197162 * ref.at(3).toDouble()));
     }
 }
 
@@ -979,7 +551,7 @@ void MainWindow::on_cb_thickness_activated(const QString &arg1)
         ui->le_composition->setText(ref.at(0));
         ui->le_uns_no->setText(ref.at(1));
         ui->le_product_type->setText(ref.at(2));
-        ui->le_allowable_stress->setText(QString::number( ref.at(3).toDouble()));
+        ui->le_allowable_stress->setText(QString::number( 10.197162 * ref.at(3).toDouble()));
     }
 
 }
@@ -1067,5 +639,307 @@ void MainWindow::on_le_temprature_editingFinished()
     }
     QString Final_value = QString::number(10.197162 * allowableStress.toFloat());
     ui->le_allowable_stress->setText(Final_value);
+}
+
+
+void MainWindow::on_cb_condition_currentIndexChanged(const QString &arg1)
+{
+    if(!(ui->le_plate_thickness_b->text().isEmpty() || ui->le_plate_thickness_a->text().isEmpty()))
+    {
+        calculate_B_Factor();
+    }
+}
+
+void MainWindow::calculate_B_Factor()
+{
+    float ration = ui->le_plate_thickness_a->text().toFloat()/ui->le_plate_thickness_b->text().toFloat();
+    ui->le_ratio->setText(QString::number(ration,'f', 4));
+    if(ui->cb_condition->currentText() == "Three sides fixed - One side simply supported")
+    {
+       if(ration == 0.25) {
+           ui->le_factor->setText(QString::number(0.020,'f', 4));
+       }
+       else if((ration > 0.25)&&(ration < 0.50)){
+           float N37 = 0.25;
+           float P37 = 0.5;
+           float N38 = 0.020;
+           float P38 = 0.081;
+           float O37 = ration;
+           float mul1 = (N37 - O37)/(N37 - P37);
+           float mul2 = N38 - P38;
+           float value = N38 - (mul1 * mul2);
+           ui->le_factor->setText(QString::number(value,'f', 4));
+       }
+       else if(ration == 0.50) {
+            ui->le_factor->setText(QString::number(0.081,'f', 4));
+       }
+       else if((ration >  0.50)&&(ration < 0.75)){
+           float N37 = 0.50;
+           float P37 = 0.75;
+           float N38 = 0.081;
+           float P38 = 0.173;
+           float O37 = ration;
+           float mul1 = (N37 - O37)/(N37 - P37);
+           float mul2 = N38 - P38;
+           float value = N38 - (mul1 * mul2);
+           ui->le_factor->setText(QString::number(value,'f', 4));
+       }
+       else if(ration == 0.75) {
+            ui->le_factor->setText(QString::number(0.173,'f', 4));
+       }
+       else if((ration >  0.75)&&(ration < 1.0)){
+            float N37 = 0.75;
+            float P37 = 1.0;
+            float N38 = 0.173;
+            float P38 = .307;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+       }
+       else if(ration == 1.0) {
+            ui->le_factor->setText(QString::number(0.307,'f', 4));
+       }
+       else if((ration >  1.0)&&(ration < 1.5)){
+            float N37 = 1.0;
+            float P37 = 1.5;
+            float N38 = .307;
+            float P38 = .539;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+       }
+       else if(ration == 1.5) {
+            ui->le_factor->setText(QString::number(0.539,'f', 4));
+       }
+       else if((ration >  1.5)&&(ration < 2.0)){
+            float N37 = 1.5;
+            float P37 = 2.0;
+            float N38 = .539;
+            float P38 = .657;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+       }
+       else if(ration == 2.0) {
+            ui->le_factor->setText(QString::number(0.657,'f', 4));
+       }
+       else if((ration >  2.0)&&(ration < 3.0)){
+            float N37 = 2.0;
+            float P37 = 3.0;
+            float N38 = .657;
+            float P38 = .718;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+       }
+       else if(ration == 3.0) {
+            ui->le_factor->setText(QString::number(0.718,'f', 4));
+       }
+       else {
+           ui->le_factor->setText(QString::number(0,'f', 4));
+           QMessageBox::warning(this, tr("My Application"),
+                                tr("Invalid a/b ratio"));
+       }
+    }
+    else if(ui->cb_condition->currentText() == "Long sides fixed Short sides simply supported")
+    {
+        if(ration < 1.0)
+        {
+            ui->le_factor->setText(QString::number(0,'f', 4));
+            QMessageBox::warning(this, tr("My Application"),
+                                 tr("Invalid a/b ratio"));
+        }
+        else if(ration == 1.0) {
+            ui->le_factor->setText(QString::number(.4182,'f', 4));
+        }
+        else if((ration > 1.0)&&(ration < 1.2)){
+            float N37 = 1.0;
+            float P37 = 1.2;
+            float N38 = .4182;
+            float P38 = .4626;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+        }
+        else if(ration == 1.2) {
+             ui->le_factor->setText(QString::number(.4182,'f', 4));
+        }
+        else if((ration > 1.2)&&(ration < 1.4)){
+            float N37 = 1.2;
+            float P37 = 1.4;
+            float N38 = .4626;
+            float P38 = .4860;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+        }
+        else if(ration == 1.4) {
+             ui->le_factor->setText(QString::number(.4860,'f', 4));
+        }
+        else if((ration > 1.4)&&(ration < 1.6)){
+            float N37 = 1.4;
+            float P37 = 1.6;
+            float N38 = .4860;
+            float P38 = .4968;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+        }
+        else if(ration == 1.6) {
+             ui->le_factor->setText(QString::number(.4968,'f', 4));
+        }
+        else if((ration > 1.6)&&(ration < 1.8)){
+            float N37 = 1.6;
+            float P37 = 1.8;
+            float N38 = .4968;
+            float P38 = .4971;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+        }
+        else if(ration == 1.8) {
+             ui->le_factor->setText(QString::number(.4971,'f', 4));
+        }
+        else if((ration > 1.8)&&(ration < 2.0)){
+            float N37 = 1.8;
+            float P37 = 2.0;
+            float N38 = .4971;
+            float P38 = .4973;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+        }
+        else if(ration == 2.0) {
+             ui->le_factor->setText(QString::number(.4973,'f', 4));
+        }
+        else {
+            ui->le_factor->setText(QString::number(0.5000,'f', 4));
+        }
+    }
+    else if(ui->cb_condition->currentText() == "Short sides fixed Long sides simply supported")
+    {
+        if(ration < 1.0)
+        {
+            ui->le_factor->setText(QString::number(0,'f', 4));
+            QMessageBox::warning(this, tr("My Application"),
+                                 tr("Invalid a/b ratio"));
+        }
+        else if(ration == 1.0) {
+            ui->le_factor->setText(QString::number(.4182,'f', 4));
+        }
+        else if((ration > 1.0)&&(ration < 1.2)){
+            float N37 = 1.0;
+            float P37 = 1.2;
+            float N38 = .4182;
+            float P38 = .5208;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+        }
+        else if(ration == 1.2) {
+             ui->le_factor->setText(QString::number(.5208,'f', 4));
+        }
+        else if((ration > 1.2)&&(ration < 1.4)){
+            float N37 = 1.2;
+            float P37 = 1.4;
+            float N38 = .5208;
+            float P38 = .5988;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+        }
+        else if(ration == 1.4) {
+             ui->le_factor->setText(QString::number(.5988,'f', 4));
+        }
+        else if((ration > 1.4)&&(ration < 1.6)){
+            float N37 = 1.4;
+            float P37 = 1.6;
+            float N38 = .5988;
+            float P38 = .6540;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+        }
+        else if(ration == 1.6) {
+             ui->le_factor->setText(QString::number(.6540,'f', 4));
+        }
+        else if((ration > 1.6)&&(ration < 1.8)){
+            float N37 = 1.6;
+            float P37 = 1.8;
+            float N38 = .6540;
+            float P38 = .6912;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+        }
+        else if(ration == 1.8) {
+             ui->le_factor->setText(QString::number(.6912,'f', 4));
+        }
+        else if((ration > 1.8)&&(ration < 2.0)){
+            float N37 = 1.8;
+            float P37 = 2.0;
+            float N38 = .6912;
+            float P38 = .7146;
+            float O37 = ration;
+            float mul1 = (N37 - O37)/(N37 - P37);
+            float mul2 = N38 - P38;
+            float value = N38 - (mul1 * mul2);
+            ui->le_factor->setText(QString::number(value,'f', 4));
+        }
+        else if(ration == 2.0) {
+             ui->le_factor->setText(QString::number(.7146,'f', 4));
+        }
+        else {
+            ui->le_factor->setText(QString::number(0.7500,'f', 4));
+        }
+    }
+    else {
+        QMessageBox::warning(this, tr("My Application"),
+                             tr("Invalid Selection"));
+    }
+
+    // Calculate plate thickness
+    double H36 = ui->le_plate_thickness_b->text().toDouble();
+    double H16 = ui->le_press_drop->text().toDouble();
+    double H44 = ui->le_factor->text().toDouble();
+    double H14 = ui->le_allowable_stress->text().toDouble();
+    double P8 = ui->le_minimun_thickness_t1->text().toDouble();
+    double minReqdThickness = (H36*sqrt(H16*H44/(1.5*H14)));
+    ui->le_min_reqd_thickness->setText(QString::number(minReqdThickness,'f', 4));
+}
+
+
+void MainWindow::on_cb_condition_currentTextChanged(const QString &arg1)
+{
+    if(!(ui->le_plate_thickness_b->text().isEmpty() || ui->le_plate_thickness_a->text().isEmpty()))
+    {
+        calculate_B_Factor();
+    }
 }
 

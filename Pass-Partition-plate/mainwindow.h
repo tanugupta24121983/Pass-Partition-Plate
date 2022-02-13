@@ -68,6 +68,11 @@ private slots:
 
     void on_le_temprature_editingFinished();
 
+    void on_cb_condition_currentIndexChanged(const QString &arg1);
+    void calculate_B_Factor();
+
+    void on_cb_condition_currentTextChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     QAxObject * excel;
